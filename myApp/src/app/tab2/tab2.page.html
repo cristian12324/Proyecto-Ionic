@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Mi Perfil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Usuario:</ion-label>
+      <br>
+      <ion-input value="{{ usuario.usuario }}" readonly></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contraseña:</ion-label>
+      <br>
+      <ion-input value="******" [disabled]="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nueva Contraseña:</ion-label>
+      <br>
+      <ion-input [(ngModel)]="password.newPassword" placeholder="Introduce nueva contraseña" type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button color="primary" (click)="cambiarPassword()">Cambiar Contraseña</ion-button>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button class="full" color="success" (click)="logOut()">Logout</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

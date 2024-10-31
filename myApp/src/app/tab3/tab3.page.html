@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Anuncios
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let anuncio of noticia">
+      <ion-thumbnail slot="start">
+        <img [src]="anuncio.imagen" alt="Imagen del anuncio" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ anuncio.titulo }}</h2>
+        <p>{{ anuncio.descripcion }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

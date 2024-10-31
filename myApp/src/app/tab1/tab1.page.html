@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Hacer Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let platillo of platillosDisponibles">
+      <ion-label>
+        <h2>{{ platillo.nombre }}</h2>
+        <p>{{ platillo.descripcion }}</p>
+        <p>Precio: {{ platillo.precio | quetzales }}</p> 
+      </ion-label>
+      <ion-button (click)="platilloSeleccionado = platillo" 
+                  [disabled]="platilloSeleccionado?.idplatillo === platillo.idplatillo">
+        Seleccionar
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label>Cantidad</ion-label>
+    <ion-input type="number" [(ngModel)]="cantidadSeleccionada" min="1" max="10"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="agregarPlatillo()">Agregar al Pedido</ion-button>
+
+  <h2>Total: {{ pedido.total | quetzales }}</h2> 
+
+  <ion-button (click)="guardarPedido()" 
+              [disabled]="pedido.detallePedidoList.length === 0">
+    Guardar Pedido
+  </ion-button>
+
+  <ion-list>
+    <ion-item *ngFor="let detalle of pedido.detallePedidoList">
+      <ion-label>
+        Platillo: {{ getPlatilloNombre(detalle.platilloIdplatillo) }} | 
+        Cantidad: {{ detalle.cantidad }} | 
+        Precio: {{ detalle.precio | quetzales }} 
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-item>
+    <ion-label>ID del Cliente para</ion-label>
+    <ion-input type="number" [(ngModel)]="idAdministrador"></ion-input>
+    <ion-button (click)="buscarPedidosPorIdAdministrador()">Buscar Pedidos</ion-button>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let pedido of pedidos">
+      <ion-label>
+        <strong>ID Pedido:</strong> {{ pedido.idpedido }} <br />
+        <strong>Total:</strong> {{ pedido.total | quetzales }} <br /> 
+        <strong>Fecha:</strong> {{ pedido.fechaHoraOrden | date:'short' }} <br />
+        <strong>Estado:</strong> {{ pedido.estadoDeOrden }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
